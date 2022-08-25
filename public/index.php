@@ -1,3 +1,5 @@
 <?php
 
-echo "hello";
+
+$router = new Router();
+$router->get('/', function());

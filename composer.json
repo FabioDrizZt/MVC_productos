@@ -1,0 +1,15 @@
+{
+    "name": "usuariopc/18.mvc",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fabio DrizZt",
+            "email": "ing.fabioarg@gmail.com"
+        }
+    ],
+    "require": {}
+}
