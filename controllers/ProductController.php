@@ -1,10 +1,11 @@
 <?php
 
 namespace app\controllers;
+use app\Router;
 
 class ProductController{
-    public static function index(){
-        echo "estoy en el index";
+    public static function index(Router $router){
+        $router->RenderView('index');
     }
 
     public static function crear(){

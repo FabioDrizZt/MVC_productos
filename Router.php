@@ -24,9 +24,13 @@ class Router{
             $fn = $this->postRoutes[$url];
         }
         if($fn){
-            call_user_func($fn);
+            call_user_func($fn, $this);
         } else {
             echo "ERROR 404: Page not found";
         }
+    }
+
+    public function RenderView($view){
+        include_once "views/$view.php";
     }
 }
