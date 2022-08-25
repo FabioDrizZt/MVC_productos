@@ -3,7 +3,7 @@
 require_once '../vendor/autoload.php';
 
 use app\Router;
-use app\controllers\RouterController;
+use app\controllers\ProductController;
 
 $router = new Router();
 

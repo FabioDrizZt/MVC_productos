@@ -18,6 +18,15 @@ class Router{
         $url = $_SERVER["PATH_INFO"] ?? "/";
         $metodo = $_SERVER["REQUEST_METHOD"];
 
-        
+        if($metodo == "GET"){
+            $fn = $this->getRoutes[$url];
+        } else {
+            $fn = $this->postRoutes[$url];
+        }
+        if($fn){
+            call_user_func($fn);
+        } else {
+            echo "ERROR 404: Page not found";
+        }
     }
 }
