@@ -5,6 +5,10 @@ use app\Router;
 
 class ProductController{
     public static function index(Router $router){
+        $productos = $router->db->getProductos();
+        echo "<pre>";
+        var_dump($productos);
+        echo "</pre>";
         $router->RenderView('index');
     }
 

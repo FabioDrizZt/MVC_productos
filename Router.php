@@ -5,6 +5,11 @@ class Router{
 
     public $getRoutes = [];
     public $postRoutes = [];
+    public Database $db;
+
+    public function __construct(){
+        $this->db = new Database();
+    }
 
     public function get($url,$fn){
         $this->getRoutes[$url]=$fn;
@@ -31,6 +36,9 @@ class Router{
     }
 
     public function RenderView($view){
+        ob_start();
         include_once "views/$view.php";
+        $contenido = ob_get_clean();
+        include_once "views/_layout.php";
     }
 }
