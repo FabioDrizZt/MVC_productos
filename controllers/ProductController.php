@@ -6,10 +6,9 @@ use app\Router;
 class ProductController{
     public static function index(Router $router){
         $productos = $router->db->getProductos();
-        echo "<pre>";
-        var_dump($productos);
-        echo "</pre>";
-        $router->RenderView('index');
+        $router->RenderView('index',[
+            'productos' => $productos
+        ]);
     }
 
     public static function crear(){
