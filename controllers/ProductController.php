@@ -2,23 +2,20 @@
 
 namespace app\controllers;
 use app\Router;
+use app\models\Producto;
 
 class ProductController{
     public static function index(Router $router){
         $buscar = $_GET['buscar'];
-        $productos = $router->db->getProductos($buscar);
-        $router->RenderView('index',[
+        $productos = $router->database->getProductos($buscar);
+        $router->RenderView('productos/index',[
             'productos' => $productos
         ]);
     }
 
     public static function crear(Router $router){
-        $errores = [];
         $datosProducto = [
-            'nombre' => '',
-            'descripcion' => '',
             'imagen' => '',
-            'precio' => ''
         ];
         
         if ($_SERVER["REQUEST_METHOD"]=='POST'){
@@ -26,20 +23,55 @@ class ProductController{
             $datosProducto['descripcion'] = $_POST['descripcion'];
             $datosProducto['imagen'] = $_POST['imagen'];
             $datosProducto['precio'] = $_POST['precio'];
-        } else {
-            $router->RenderView('crear',[
-                'producto' => $datosProducto,
-                'errores' => $errores
-            ]);
+
+            $producto = new Producto();
+            $producto->cargar($datosProducto);
+            $producto->guardar();
+            header('Location: /productos');
+            exit;
         }
+        $router->RenderView('productos/crear',[
+            'producto' => $datosProducto,
+        ]);
     }
 
-    public static function editar(){
-        echo "estoy en el editar";
+    public static function actualizar(Router $router){
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /productos');
+            exit;
+        }
+        $datosProducto = $router->database->getProductoPorId($id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $datosProducto['nombre'] = $_POST['nombre'];
+            $datosProducto['descripcion'] = $_POST['descripcion'];
+            $datosProducto['precio'] = $_POST['precio'];
+            $datosProducto['imagen'] = $_FILES['image'] ?? null;
+
+            $producto = new Producto();
+            $producto->cargar($datosProducto);
+            $producto->guardar();
+            header('Location: /productos');
+            exit;
+        }
+
+        $router->renderView('productos/actualizar', [
+            'producto' => $datosProducto
+        ]);    
     }
 
-    public static function borrar(){
-        echo "estoy en el borrar";
+    public static function borrar(Router $router){
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            header('Location: /productos');
+            exit;
+        }
+
+        if ($router->database->borrarProducto($id)) {
+            header('Location: /productos');
+            exit;
+        }
     }
 
 }

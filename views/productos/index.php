@@ -30,14 +30,11 @@
         <td><?=$producto['precio']?></td>
         <td><?=$producto['fecha_creacion']?></td>
         <td>
-            <form method="GET" action="actualizar.php">
-              <input type="hidden" name="id" value="<?=$producto['id']?>"/>
-              <button type="submit" class="btn btn-info btn-sm">Actualizar</button>
-            </form>
-            <form method="POST" action="borrar.php">
-              <input type="hidden" name="id" value="<?=$producto['id']?>"/>
-              <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
-            </form>
+          <a href="/productos/actualizar?id=<?php echo $producto['id'] ?>" class="btn btn-sm btn-outline-primary">actualizar</a>
+          <form method="post" action="/productos/borrar" style="display: inline-block">
+              <input  type="hidden" name="id" value="<?php echo $producto['id'] ?>"/>
+              <button type="submit" class="btn btn-sm btn-outline-danger">borrar</button>
+          </form>
         </td>
         </tr>
     <?php }?>

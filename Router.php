@@ -1,14 +1,13 @@
 <?php
-
 namespace app;
 class Router{
 
     public $getRoutes = [];
     public $postRoutes = [];
-    public Database $db;
+    public ?Database $database = null;
 
-    public function __construct(){
-        $this->db = new Database();
+    public function __construct(Database $database){
+        $this->database = $database;
     }
 
     public function get($url,$fn){
@@ -28,14 +27,15 @@ class Router{
         } else {
             $fn = $this->postRoutes[$url];
         }
-        if($fn){
-            call_user_func($fn, $this);
-        } else {
+        if(!$fn){
             echo "ERROR 404: Page not found";
+            exit;
         }
+        call_user_func($fn, $this);
+
     }
 
-    public function RenderView($view, $params = []){ 
+    public function renderView($view, $params = []){ 
         foreach($params as $key => $value){
             $$key = $value;
         }

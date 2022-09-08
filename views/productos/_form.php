@@ -1,14 +1,12 @@
-<?php foreach ($errores as $error) {?>
+<!-- <?php foreach ($errores as $error) {?>
       <div class="alert alert-danger" role="alert">
         <?=$error?>
       </div>
-    <?php }?>
+    <?php }?> -->
 
-    <form method="post" enctype="multipart/form-data">
-
+<form method="post" enctype="multipart/form-data">
   <div class="mb-3">
-    <img src="<?=$producto['imagen'] ?? null?>" class="imagen editar" >
-    <label>Imagen</label>
+    <img src="/<?=$producto['imagen'] ?? null?>" alt='Imagen no encontrada' class="imagen editar" id='imagen' >
     <input type="file" class="form-control" id="imagen" name="imagen" >
   </div>
   <div class="mb-3">
