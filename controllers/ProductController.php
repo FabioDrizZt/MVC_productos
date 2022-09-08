@@ -19,9 +19,10 @@ class ProductController{
         ];
         
         if ($_SERVER["REQUEST_METHOD"]=='POST'){
+
             $datosProducto['nombre'] = $_POST['nombre'];
             $datosProducto['descripcion'] = $_POST['descripcion'];
-            $datosProducto['imagen'] = $_POST['imagen'];
+            $datosProducto['imagen'] = $_FILES['imagen'] ;
             $datosProducto['precio'] = $_POST['precio'];
 
             $producto = new Producto();
@@ -47,7 +48,7 @@ class ProductController{
             $datosProducto['nombre'] = $_POST['nombre'];
             $datosProducto['descripcion'] = $_POST['descripcion'];
             $datosProducto['precio'] = $_POST['precio'];
-            $datosProducto['imagen'] = $_FILES['image'] ?? null;
+            $datosProducto['imagen'] = $_FILES['imagen'] ?? null;
 
             $producto = new Producto();
             $producto->cargar($datosProducto);

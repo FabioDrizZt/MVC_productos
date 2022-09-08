@@ -51,8 +51,8 @@ class Database {
     {
         $consulta = $this->pdo->prepare("UPDATE productos SET nombre = :nombre, 
                                         imagen = :imagen, 
-                                        description = :description, 
-                                        price = :price WHERE id = :id");
+                                        descripcion = :descripcion, 
+                                        precio = :precio WHERE id = :id");
         $consulta->bindValue(':nombre', $producto->nombre);
         $consulta->bindValue(':imagen', $producto->rutaImagen);
         $consulta->bindValue(':precio', $producto->precio);
