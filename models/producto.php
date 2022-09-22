@@ -17,7 +17,7 @@ class Producto{
         $this->nombre = $datos['nombre'];
         $this->descripcion = $datos['descripcion'];
         $this->precio = $datos['precio'];
-        $this->imagen = $datos['imagen'] ?? null;
+        $this->imagen = $_FILES['imagen'] ?? null;
         $this->rutaImagen = $datos['RutaImagen'] ?? null;
     }
 
@@ -39,7 +39,7 @@ class Producto{
             if ($this->rutaImagen) {
                 unlink(__DIR__ . '/../public/' . $this->rutaImagen);
             }
-            $rutaImagen = 'img/' . UtilHelper::randomString(8) . '/' . $this->imagen["name"]; #ruta aleatoria de la imagen
+            $this->rutaImagen = 'img/' . UtilHelper::randomString(8) . '/' . $this->imagen["name"]; #ruta aleatoria de la imagen
             mkdir(dirname($this->rutaImagen));
             move_uploaded_file($this->imagen['tmp_name'], $this->rutaImagen);
         }
